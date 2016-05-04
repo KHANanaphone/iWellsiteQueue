@@ -18,7 +18,7 @@ public class Servlet extends HttpServlet {
 	
 	
 	private static final long serialVersionUID = 1L;
-	private QueueManager queueManager;
+	private TopicManager queueManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,7 +26,7 @@ public class Servlet extends HttpServlet {
     public Servlet() {
         super();    
         
-        this.queueManager = new QueueManager();        
+        this.queueManager = new TopicManager();        
     }
 
 	/**
