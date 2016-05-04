@@ -56,19 +56,18 @@ public class Servlet extends HttpServlet {
 		String message = request.getParameter("message");
 		
 		if(!isValidTopic(topic)){
-
-			response.getWriter().append("Invalid topic name.");
+			
+			response.getWriter().write("Invalid topic name.");
 			return;
 		};
 		
-		if(message == null){
+		if(message == null || message.length() == 0){
 
-			response.getWriter().append("'Message' parameter not found.");
+			response.getWriter().write("Message parameter not found.");
 			return;
 		};
 		
-		this.topicManager.addMessage(topic, message);		
-		response.getWriter().append("Message added.");
+		this.topicManager.addMessage(topic, message);
 	}
 	
 	/**

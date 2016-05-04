@@ -8,8 +8,15 @@
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen"charset="utf-8">
-
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    	
+	<style>
+	
+		#response {
+			margin-top: 10px;
+		}
+		
+	</style>
 </head>
 
 <body>
@@ -27,36 +34,16 @@
 		  <input type="text" class="form-control" id="message" placeholder="Message">
 		</div>
 		
-		<button type='button' onclick='sendMessage()'>Submit</button>
+		<button type='button'>Submit</button>
 		
 		<div id='response' class='alert'></div>
 	
 	</div>
 	
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/components/jquery-2.2.3.min.js"></script>
+    <script src="js/components/bootstrap.min.js"></script>
     <script src="js/config.js"></script>
-
-    <script>
-    
-		function sendMessage(){			
-
-			var name = $('#topicName').val();
-			var message = $('#message').val();
-			
-            var server = 'https://' + CONFIG.serverName + '/Broker/' + name;
-            
-            $.post(server, {message: message}, callback);
-
-            function callback(response){
-            	
-                debugger;
-                $('#response').text(response);
-            };
-			
-		};
-
-    </script>
+    <script src="js/src/producer.js"></script>
 
 </body>
 </html>
