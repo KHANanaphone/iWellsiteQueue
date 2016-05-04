@@ -1,13 +1,6 @@
-$(document).ready(function(){
-	
-	$('button').click(sendMessage);
-	$('#message').keyup(function(e){
+var Producer = {
 		
-		if(e.keyCode == 13)
-			sendMessage();
-	});	
-
-	function sendMessage(){			
+	sendMessage: function(){			
 
 		var name = $('#topicName').val();
 		var message = $('#message').val();
@@ -36,7 +29,15 @@ $(document).ready(function(){
         	$('#topicName').val('');
         	$('#message').val('');
 	    };			
-	};
+	}
+}
+
+$(document).ready(function(){
 	
+	$('#message').keyup(function(e){
+		
+		if(e.keyCode == 13)
+			Producer.sendMessage();
+	});	
 });
 
