@@ -50,7 +50,6 @@ var Consumer = {
 					
 		function errorCallback(e){
 			
-			debugger;
 			$topic.find('.status').text(e.responseText);
 			
 			if(e.status != 408)
