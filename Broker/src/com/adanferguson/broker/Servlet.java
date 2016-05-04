@@ -19,7 +19,7 @@ public class Servlet extends HttpServlet {
 	
 	
 	private static final long serialVersionUID = 1L;
-	private TopicManager queueManager;
+	private TopicManager topicManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +27,7 @@ public class Servlet extends HttpServlet {
     public Servlet() {
         super();    
         
-        this.queueManager = new TopicManager();        
+        this.topicManager = new TopicManager();        
     }
 
 	/**
@@ -52,18 +52,23 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
 		String topic = request.getPathInfo().substring(1);
+		String message = request.getParameter("message");
 		
 		if(!isValidTopic(topic)){
-			
-			//handle invalid
 
-			response.getWriter().append("Invalid ");
+			response.getWriter().append("Invalid topic name.");
 			return;
 		};
 		
-		response.getWriter().append("Message Added");
+		if(message == null){
+
+			response.getWriter().append("'Message' parameter not found.");
+			return;
+		}	
+		
+		this.topicManager.addMessage(topic, message);		
+		response.getWriter().append("Message added.");
 	}
 	
 	/**
