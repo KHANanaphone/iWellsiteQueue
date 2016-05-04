@@ -40,7 +40,7 @@ public class Servlet extends HttpServlet {
 		if(!isValidTopic(topic)){
 			
 			//handle invalid
-		};		
+		};
 		
 		//handle valid
 		response.getWriter().append("Hello");
@@ -65,7 +65,7 @@ public class Servlet extends HttpServlet {
 
 			response.getWriter().append("'Message' parameter not found.");
 			return;
-		}	
+		};
 		
 		this.topicManager.addMessage(topic, message);		
 		response.getWriter().append("Message added.");
