@@ -18,14 +18,14 @@
 
         $(document).ready(function(){
 
-            var url = 'http://' + CONFIG.serverName + '/Broker/' + 'topicA';
-            var data = {message: 'Test Message'};
-
-            $.post(url, data, callback);
+            var server = 'http://' + CONFIG.serverName + '/Broker/';
+            $.get(server + 'GetSessionID', callback);
 
             function callback(data){
 
+            	
                 debugger;
+                var sessionID = data;
             };
         });
 
