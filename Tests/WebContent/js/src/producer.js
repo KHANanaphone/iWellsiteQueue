@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$('.button').click(sendMessage);
+	$('button').click(sendMessage);
 	$('#message').keyup(function(e){
 		
 		if(e.keyCode == 13)
@@ -14,25 +14,27 @@ $(document).ready(function(){
 		
 	    var server = 'http://' + CONFIG.serverName + '/Broker/' + name;
 	    
-	    $.post(server, {message: message}, callback);
-
-	    function callback(error){
+	    $.post(server, {message: message})
+	    .success(callback)
+	    .error(errorCallback);
 	    
-	    	if(error)
-	            $('#response')
-	            .addClass('alert-danger')
-	            .removeClass('alert-success')
-	            .text(error);
-	    	else {
+	    function errorCallback(e, message){	    	
+	    	
+            $('#response')
+            .addClass('alert-danger')
+            .removeClass('alert-success')
+            .text(e.responseText);
+	    }
 
-	        	$('#response')
-	        	.addClass('alert-success')
-	        	.removeClass('alert-danger')
-	        	.text("Message added successfully. Add another?");
-	        	
-	        	$('#topicName').val('');
-	        	$('#message').val('');
-	    	}       		
+	    function callback(message){	    
+	    	
+        	$('#response')
+        	.addClass('alert-success')
+        	.removeClass('alert-danger')
+        	.text("Message added successfully. Add another?");
+        	
+        	$('#topicName').val('');
+        	$('#message').val('');
 	    };			
 	};
 	

@@ -36,14 +36,25 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String topic = request.getPathInfo().substring(1);
+		String id = request.getParameter("id");
 		
 		if(!isValidTopic(topic)){
-			
-			//handle invalid
-		};
+
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("Invalid topic name.");
+			return;
+		}
 		
-		//handle valid
-		response.getWriter().append("Hello");
+		String message = this.topicManager.getMessage(topic, id);
+		
+		if(message == null){
+
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("No message found.");
+			return;			
+		}
+		
+		response.getWriter().write(message);
 	}
 
 
@@ -56,13 +67,14 @@ public class Servlet extends HttpServlet {
 		String message = request.getParameter("message");
 		
 		if(!isValidTopic(topic)){
-			
+
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			response.getWriter().write("Invalid topic name.");
 			return;
-		};
-		
-		if(message == null || message.length() == 0){
+		}
+		else if(message == null || message.length() == 0){
 
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			response.getWriter().write("Message parameter not found.");
 			return;
 		};
