@@ -18,7 +18,7 @@
 
         $(document).ready(function(){
 
-            var url = 'https://' + CONFIG.serverName + '/Broker/' + 'topicA';
+            var url = 'http://' + CONFIG.serverName + '/Broker/' + 'topicA';
             var data = {message: 'Test Message'};
 
             $.post(url, data, callback);
