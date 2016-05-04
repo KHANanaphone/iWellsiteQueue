@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Producer</title>
+    <title>Consumer</title>
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
 
@@ -15,6 +15,11 @@
 		#sessionID span {
 			
 			font-weight: bold;
+		}
+		
+		.hidden {
+			
+			display: none;
 		}
 	</style>
 </head>
@@ -27,7 +32,18 @@
 		
 		<p id="sessionID">Your session ID is: <span></span></p>
 		
-		
+		<p>		
+			<div id='subscribe' class="hidden form-group">
+			
+			  <label for="topicName">Subscribe to New Topic</label>
+			  <div class="input-group">
+			      <input type="text" id="topicName" class="form-control" placeholder="Search for...">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" onclick="Consumer.subscribeToTopic()" type="button">Go!</button>
+			      </span>
+			  </div>			    
+			</div>
+		</p>
 	
 	</div>
 	

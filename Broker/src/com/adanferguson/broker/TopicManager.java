@@ -26,7 +26,12 @@ public class TopicManager {
 	
 	public String getMessage(String topicName, String consumerID){
 		
-		return this.getTopic(topicName).getMessage(consumerID);
+		Topic t = this.getTopic(topicName);
+		
+		if(t == null)
+			return null;
+		
+		return t.getMessage(consumerID);
 	}
 	
 	/*
