@@ -1,7 +1,20 @@
 var Consumer = {
 		
 	sessionId: null,
-	$topics: {},	
+	$topics: {},
+	autoCheck: {},
+	status: {},
+	
+	setAutoCheck: function(input){
+
+		var $section = $(input).parent('.topic-section');
+		var name = $section.attr('topic-name');		
+		Consumer.autoCheck[name] = input.checked;
+		
+		if(input.checked && Consumer.status[name] == 0)
+			Consumer.getNext(name);
+	},
+	
 	subscribeToTopic: function(){
 			
 		var topicName = $('#topicName').val();
@@ -13,6 +26,7 @@ var Consumer = {
 		
 		var $topic = $('.hidden .topic-section').clone();		
 		
+		$topic.attr('topic-name', topicName);
 		$topic.find('.name').text(topicName);	
 		$topic.find('button').click(function(){ Consumer.getNext(topicName)});
 		
@@ -28,6 +42,7 @@ var Consumer = {
 		var $topic = Consumer.$topics[topic];
 		
 		startSpinAnim();
+		Consumer.status[topic] = 1;		
 		
 		$.get(server, {id: Consumer.sessionID})
 		.error(errorCallback)
@@ -35,15 +50,32 @@ var Consumer = {
 					
 		function errorCallback(e){
 			
-			stopSpinAnim();			
+			debugger;
 			$topic.find('.status').text(e.responseText);
+			
+			if(e.status != 408)
+				Consumer.autoCheck[topic] = false;
+				
+			doNext();
+				
 		};
 		
 		function callback(message){
 
 			$topic.find('.messages').append('<p>' + message + '</p>');
-			stopSpinAnim();
 			$topic.find('.status').text('');
+			doNext();
+		};
+		
+		function doNext(){
+
+			if(Consumer.autoCheck[topic]){
+				Consumer.getNext(topic);
+			}
+			else{
+				stopSpinAnim();
+				Consumer.status[topic] = 0;	
+			}
 		};
 		
 		function startSpinAnim(){
