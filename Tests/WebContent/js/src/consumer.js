@@ -25,6 +25,9 @@ var Consumer = {
 	getNext: function(topic){		
 
 		var server = 'http://' + CONFIG.serverName + '/Broker/' + topic;
+		var $topic = Consumer.$topics[topic];
+		
+		startSpinAnim();
 		
 		$.get(server, {id: Consumer.sessionID})
 		.error(errorCallback)
@@ -32,13 +35,27 @@ var Consumer = {
 					
 		function errorCallback(e){
 			
-			debugger;
+			stopSpinAnim();			
+			$topic.find('.status').text(e.responseText);
 		};
 		
 		function callback(message){
 
-			Consumer.$topics[topic].find('.messages').append('<p>' + message + '</p>');
+			$topic.find('.messages').append('<p>' + message + '</p>');
+			stopSpinAnim();
+			$topic.find('.status').text('');
 		};
+		
+		function startSpinAnim(){
+			$topic.find('.check').addClass('hidden');
+			$topic.find('.checking').removeClass('hidden');
+		}
+		
+		function stopSpinAnim(){
+			$topic.find('.checking').addClass('hidden');
+			$topic.find('.check').removeClass('hidden');
+			
+		}
 	}
 };
 

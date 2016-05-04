@@ -9,6 +9,7 @@
     <meta name="author" content="SitePoint">
 
     <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     	
 	<style>
 	
@@ -38,6 +39,11 @@
 		
 			border-bottom: none;
 		}
+		
+		#topics .topic-section button {
+		
+	    	width: 140px;
+	    }
 		
 	</style>
 </head>
@@ -73,7 +79,11 @@
 		<div class='topic-section'>
 			<h3 class='name'></h3>
 			<div class='messages'></div>
-			<button type='button' class='btn btn-primary'>Check</button>
+			<button type='button' class='btn btn-primary'>
+				<span class='check'>Check</span>
+				<span class='checking hidden'>Checking... <i class='fa fa-cog fa-spin'></i></span>				
+			</button>
+			<span class='status'></span>
 		</div>
 	</div>
 	

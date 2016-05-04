@@ -45,16 +45,31 @@ public class Servlet extends HttpServlet {
 			return;
 		}
 		
-		String message = this.topicManager.getMessage(topic, id);
-		
-		if(message == null){
 
-	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			response.getWriter().write("No message found.");
-			return;			
+		try {
+			
+			int triesLeft = 5;
+			while(triesLeft > 0){
+	
+				String message = this.topicManager.getMessage(topic, id);
+				
+				if(message != null){
+	
+					response.getWriter().write(message);
+					return;
+				}
+				
+				Thread.sleep(1000);
+				triesLeft--;
+			}
+		}	
+		catch(InterruptedException ex) {
+
 		}
 		
-		response.getWriter().write(message);
+        response.setStatus(HttpServletResponse.SC_REQUEST_TIMEOUT);
+		response.getWriter().write("No message found.");
+		return;	
 	}
 
 
