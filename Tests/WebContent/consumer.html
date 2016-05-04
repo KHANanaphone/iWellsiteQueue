@@ -4,17 +4,37 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Consumer</title>
+    <title>Producer</title>
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    	
+	<style>
+	
+		#sessionID span {
+			
+			font-weight: bold;
+		}
+	</style>
 </head>
 
 <body>
 
-
-
-    <script src="js/jquery-2.2.3.min.js"></script>
+	<div class='container'>	
+		
+		<h1>Consumer Sample Page</h1>
+		
+		<p id="sessionID">Your session ID is: <span></span></p>
+		
+		
+	
+	</div>
+	
+    <script src="js/components/jquery-2.2.3.min.js"></script>
+    <script src="js/components/bootstrap.min.js"></script>
     <script src="js/config.js"></script>
-    
+    <script src="js/src/consumer.js"></script>
+
 </body>
 </html>
