@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +43,27 @@ public class Servlet extends HttpServlet {
 		};		
 		
 		//handle valid
+		response.getWriter().append("Hello");
+	}
+
+
+	/**
+	 * Handle a "post" request from a producer, ie, adding a message to the end of a given topic.
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		String topic = request.getPathInfo().substring(1);
+		
+		if(!isValidTopic(topic)){
+			
+			//handle invalid
+
+			response.getWriter().append("Invalid ");
+			return;
+		};
+		
+		response.getWriter().append("Message Added");
 	}
 	
 	/**
@@ -58,21 +80,5 @@ public class Servlet extends HttpServlet {
 		
 		return matcher.find() ? true : false;				
 	};
-
-	/**
-	 * Handle a "post" request from a producer, ie, adding a message to the end of a given topic.
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		String topic = request.getPathInfo().substring(1);
-		
-		if(!isValidTopic(topic)){
-			
-			//handle invalid
-		};		
-		
-		//handle valid
-	}
 
 }
