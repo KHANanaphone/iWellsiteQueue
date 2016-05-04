@@ -45,6 +45,13 @@ public class Servlet extends HttpServlet {
 			return;
 		}
 		
+		if(id == null || id.length() == 0){			
+
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("No ID found.");
+			return;
+		}		
+		
 
 		try {
 			
@@ -106,7 +113,7 @@ public class Servlet extends HttpServlet {
 	 */
 	private boolean isValidTopic(String input){
 
-		Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+		Pattern pattern = Pattern.compile("^[a-zA-Z0-9 ]+$");
 	    Matcher matcher = pattern.matcher(input);
 		
 		return matcher.find() ? true : false;				
