@@ -35,7 +35,7 @@ public class Topic {
 		int s = status.intValue();
 		
 		// no more messages to read
-		if(s < this.messages.size())
+		if(s >= this.messages.size())
 			return null;	
 		
 		this.consumerStatuses.put(consumerID, s + 1);	

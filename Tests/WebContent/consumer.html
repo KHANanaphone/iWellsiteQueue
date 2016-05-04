@@ -21,6 +21,24 @@
 			
 			display: none;
 		}
+		
+		#topics {
+			
+			padding: 5px 20px 20px;
+    		border: 1px solid #CCC;
+		}
+		
+		#topics .topic-section {			
+			
+			margin: 10px 0px;
+			border-bottom: 1px solid #DDD;	
+		}		
+		
+		#topics .topic-section:last-child {
+		
+			border-bottom: none;
+		}
+		
 	</style>
 </head>
 
@@ -44,7 +62,19 @@
 			  </div>			    
 			</div>
 		</p>
+		
+		<div id='topics' class='hidden'>
+		
+		</div>
+	</div>
 	
+	<div class='hidden'>
+	
+		<div class='topic-section'>
+			<h3 class='name'></h3>
+			<div class='messages'></div>
+			<button type='button' class='btn btn-primary'>Check</button>
+		</div>
 	</div>
 	
     <script src="js/components/jquery-2.2.3.min.js"></script>

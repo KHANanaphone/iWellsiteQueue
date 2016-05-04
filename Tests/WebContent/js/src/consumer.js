@@ -1,13 +1,29 @@
 var Consumer = {
 		
 	sessionId: null,
+	$topics: {},	
 	subscribeToTopic: function(){
 			
-		var topic = $('#topicName').val();
+		var topicName = $('#topicName').val();
 		
-		if(topic.length <= 0)
+		if(topicName.length <= 0)
+			return;
+		if(Consumer.$topics[topicName]) //already subscribed
 			return;
 		
+		var $topic = $('.hidden .topic-section').clone();		
+		
+		$topic.find('.name').text(topicName);	
+		$topic.find('button').click(function(){ Consumer.getNext(topicName)});
+		
+		Consumer.$topics[topicName] = $topic;	
+		$('#topics').append($topic).removeClass('hidden');
+		
+		Consumer.getNext(topicName);
+	},
+	
+	getNext: function(topic){		
+
 		var server = 'http://' + CONFIG.serverName + '/Broker/' + topic;
 		
 		$.get(server, {id: Consumer.sessionID})
@@ -21,7 +37,7 @@ var Consumer = {
 		
 		function callback(message){
 
-			debugger;			
+			Consumer.$topics[topic].find('.messages').append('<p>' + message + '</p>');
 		};
 	}
 };
