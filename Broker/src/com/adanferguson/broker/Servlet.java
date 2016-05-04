@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/*")
 public class Servlet extends HttpServlet {
+	
+	
 	private static final long serialVersionUID = 1L;
+	private QueueManager queueManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -23,6 +26,7 @@ public class Servlet extends HttpServlet {
     public Servlet() {
         super();    
         
+        this.queueManager = new QueueManager();        
     }
 
 	/**
